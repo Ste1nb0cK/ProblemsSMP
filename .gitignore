@@ -1,0 +1,7 @@
+*.out
+*.dat
+*.x
+*.dir-locals.el
+*.o
+foo
+*/.mypy_cache
