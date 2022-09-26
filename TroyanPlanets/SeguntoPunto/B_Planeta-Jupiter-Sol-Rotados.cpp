@@ -5,7 +5,7 @@ using namespace std;
 
 //Constantes globales
 
-const int N=3;
+const int N=2;
 const double G=1.0;
 
 //constantes de PEFRL
@@ -117,13 +117,11 @@ int main(){
   double tdibujo,tcuadro=T/100;
   int i;
   // T es mas o menos 7000
-  double x2 = x1*std::cos(M_PI/3); double y2 = x1*std::sin(M_PI/3);
-  double Vx2 = V1*(-std::sin(M_PI/3)); double Vy2 = V1*std::cos(M_PI/3);
-  double  m2 = 5e-3;
-    //---------------(x0,y0,z0,Vx0,Vy0,Vz,m0,R0)
-  Planeta[0].Inicie(x0, 0.0, 0.0,  0.0, V0, 0, m0, 1.0); // Sol
-  Planeta[1].Inicie(x1, 0.0, 0.0,  0, V1, 0.0, m1, 0.5); // Jupiter
-  Planeta[2].Inicie(x2, y2, 0.0, Vx2, Vy2, 0.0, m2, 0.1);// troyanos
+  
+  //---------------(x0,y0,z0,Vx0,Vy0,Vz,m0,R0)
+  Planeta[0].Inicie(x0, 0, 0,  0, V0, 0,m0,1.0); // Sol
+  Planeta[1].Inicie(x1, 0, 0,  0, V1, 0,m1,0.5); // Jupiter
+  
   //  InicieAnimacion();
   
   for(t=0,tdibujo=0; t<tmax; t+=dt,tdibujo+=dt){
@@ -162,3 +160,4 @@ int main(){
   
 return 0;
 }
+
