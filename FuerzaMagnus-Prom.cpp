@@ -241,13 +241,13 @@ void PartiPresion(int NumPoints, double* Points,  double* VecArea, double R, int
 
 int main(void){
   LatticeBoltzmann Aire;
-  int t,tmax=3000;//=10000;
+  int t,tmax=6000;//=10000;
   double rho0=1.0,Ufan0=0.1;
+  double tProm = 3000;
 
-   double tau = 0.54;
+   double tau = 1.5;
   int ixc=128, iyc=32;
   double R = 8.0;
- 
   double omega = 2*M_PI/1000;
   
   int NumPoints = 24;
@@ -258,19 +258,25 @@ int main(void){
   double FXdrag = 0;
   double FYdrag = 0;
 
-  ofstream Fuerza("FuerzasMagnus-Tau-22-100.txt");
+  ofstream Fuerza("FuerzasMagnus-Tau052-07-Prom.txt");
 
-  for(double tau = 2.0; tau < 10; tau += 1.0){
-  //Start
+  for(double tau = 0.52; tau < 0.75; tau += 0.01){
+    double FXdragProm = 0;
+    double FYdragProm = 0;
+    //Start
     Aire.Start(rho0,Ufan0,0);
-  //Run
+    //Run
     for(t=0;t<tmax;t++){
       Aire.Collision(tau);
       Aire.ImposeFields(Ufan0,omega,R, ixc,iyc);
-      Aire.FuerzaTotalDrag(NumPoints, Points, VecArea, tau,FXdrag, FYdrag);    
+      Aire.FuerzaTotalDrag(NumPoints, Points, VecArea, tau,FXdrag, FYdrag);
+      //Calculo de Promedios
+      if(t>tProm){
+	FXdragProm += FXdrag;
+	FYdragProm += FYdrag; }
       Aire.Advection();
     }
-    Fuerza << tau << "\t" << FXdrag<<"\t"<< FYdrag<<std::endl;
+    Fuerza << tau << "\t" << FXdragProm/(tmax-tProm)<<"\t"<< FYdragProm/(tmax-tProm)<<std::endl;
   }
   return 0;
 }  

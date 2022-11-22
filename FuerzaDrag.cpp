@@ -242,7 +242,7 @@ void PartiPresion(int NumPoints, double* Points,  double* VecArea, double R, int
 
 int main(void){
   LatticeBoltzmann Aire;
-  int t,tmax=3000;//=10000;
+  int t,tmax=7000;//=10000;
   double rho0=1.0,Ufan0=0.1;
 
 
@@ -257,7 +257,7 @@ int main(void){
   double FXdrag = 0;
   double FYdrag = 0;
 
-  ofstream Fuerza("FuerzasDragTiempo.txt");
+  ofstream Fuerza("FuerzasDrag-Tiempo-Tau154.txt");
 
   
   //Start
